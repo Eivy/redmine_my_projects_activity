@@ -2,7 +2,9 @@
 	<h3><%= link_to l(:my_projects_activity), :controller => 'my_activity' %></h3>
 	<% 
 	current_user = User.current
-	events = Redmine::Activity::Fetcher.new(current_user).events(nil, nil, :limit => 10).select{|e, in_group| current_user.member_of?(e.project)}
+	today ||= Date.today + 1
+	from_day = today - 7
+	events = Redmine::Activity::Fetcher.new(current_user).events(from_day, today).select{|e, in_group| current_user.member_of?(e.project)}.take(10)
 	events_by_day = events.group_by(&:event_date)
 	events_by_day.keys.sort.reverse.each do |day| %>
 	<h4><%= format_activity_day(day) %></h4>
