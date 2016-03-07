@@ -18,8 +18,5 @@
 			<span class="author"><%= link_to_user(e.event_author) if e.respond_to?(:event_author) %></span></dd>
 		<% end -%>
 	</dl>
-	<%
-	end
-	-%>
-<p class='small'><%= link_to l(:my_projects_activity), :controller => 'my_activity' %></p>
+	<% end -%>
 </div>
