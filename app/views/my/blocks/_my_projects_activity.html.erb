@@ -1,5 +1,5 @@
 <div id="activity">
-	<h3><%= l(:my_projects_activity) %></h3>
+	<h3><%= link_to l(:my_projects_activity), :controller => 'my_activity' %></h3>
 	<% 
 	current_user = User.current
 	events = Redmine::Activity::Fetcher.new(current_user).events(nil, nil, :limit => 10).select{|e, in_group| current_user.member_of?(e.project)}
