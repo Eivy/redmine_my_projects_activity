@@ -1,11 +1,11 @@
 <div id="activity">
-	<h2><%= l(:my_projects_activity) %></h2>
+	<h3><%= l(:my_projects_activity) %></h3>
 	<% 
 	current_user = User.current
 	events = Redmine::Activity::Fetcher.new(current_user).events(nil, nil, :limit => 10).select{|e, in_group| current_user.member_of?(e.project)}
 	events_by_day = events.group_by(&:event_date)
 	events_by_day.keys.sort.reverse.each do |day| %>
-	<h3><%= format_activity_day(day) %></h3>
+	<h4><%= format_activity_day(day) %></h4>
 	<dl>
 		<% events_by_day[day].sort{|a,b| a.event_datetime<=>b.event_datetime}.reverse.each do |e, in_group| -%>
 			<dt class="<%= e.event_type %> <%= "grouped" if in_group %> <%= current_user.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
